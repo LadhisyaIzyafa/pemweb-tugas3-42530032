@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+
+<div class="page-head">
+  <h1>My Watchlist! ♡</h1>
+  <a class="btn" href="/item/tambah">+ Tambah Film</a>
+</div>
+
+<div class="filter">
+  <a href="/" class="chip <%= genreDipilih === '' ? 'active' : '' %>">Semua</a>
+  <% daftarGenre.forEach(g => { %>
+    <a href="/?genre=<%= encodeURIComponent(g) %>"
+       class="chip <%= genreDipilih.toLowerCase() === g.toLowerCase() ? 'active' : '' %>"><%= g %></a>
+  <% }) %>
+</div>
+
+<% if (films.length === 0) { %>
+  <p class="empty">Tidak ada film untuk genre ini.</p>
+<% } else { %>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th><th>Judul</th><th>Sutradara</th><th>Tahun</th><th>Genre</th><th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% films.forEach(f => { %>
+          <tr>
+            <td><%= f.id %></td>
+            <td><a class="judul-link" href="/item/<%= f.id %>"><%= f.judul %></a></td>
+            <td><%= f.sutradara %></td>
+            <td><%= f.tahun %></td>
+            <td><span class="tag"><%= f.genre %></span></td>
+            <td class="aksi">
+              <a class="btn" href="/item/edit/<%= f.id %>">Edit</a>
+              <form action="/item/hapus/<%= f.id %>" method="POST" onsubmit="return confirm('Yakin ingin menghapus film ini?');">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

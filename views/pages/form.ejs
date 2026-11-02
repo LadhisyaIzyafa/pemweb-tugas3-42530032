@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+
+<div class="card form-card">
+  <h1><%= judulForm %></h1>
+
+  <form action="<%= action %>" method="POST">
+    <div class="field">
+      <label for="judul">Judul</label>
+      <input type="text" id="judul" name="judul" value="<%= film.judul %>" required>
+    </div>
+    <div class="field">
+      <label for="sutradara">Sutradara</label>
+      <input type="text" id="sutradara" name="sutradara" value="<%= film.sutradara %>" required>
+    </div>
+    <div class="field">
+      <label for="tahun">Tahun rilis</label>
+      <input type="number" id="tahun" name="tahun" value="<%= film.tahun %>" required>
+    </div>
+    <div class="field">
+      <label for="genre">Genre</label>
+      <select id="genre" name="genre" required>
+        <option value="">Pilih genre</option>
+        <% ['drama sejarah','thriller','horor','romansa','aksi','komedi','fiksi ilmiah','animasi'].forEach(g => { %>
+          <option value="<%= g %>" <%= film.genre === g ? 'selected' : '' %>><%= g %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="field">
+      <label for="poster">Nama file poster (opsional, ada di public/img)</label>
+      <input type="text" id="poster" name="poster" value="<%= film.poster || '' %>">
+    </div>
+    <div class="field">
+      <label for="sinopsis">Sinopsis</label>
+      <textarea id="sinopsis" name="sinopsis" rows="5" required><%= film.sinopsis %></textarea>
+    </div>
+    <div class="aksi">
+      <button type="submit" class="btn"><%= tombol %></button>
+      <a class="btn" href="/">Batal</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

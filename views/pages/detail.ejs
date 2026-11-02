@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="card detail">
+  <% if (film.poster) { %>
+    <img class="poster-detail" src="/img/<%= film.poster %>" alt="Poster <%= film.judul %>">
+  <% } %>
+  <h1><%= film.judul %></h1>
+  <p class="meta">Sutradara: <%= film.sutradara %></p>
+  <p class="meta">Tahun rilis: <%= film.tahun %></p>
+  <p><span class="tag"><%= film.genre %></span></p>
+  <h2>Sinopsis</h2>
+  <p><%= film.sinopsis %></p>
+  <div class="aksi">
+    <a class="btn" href="/">&larr; Kembali ke katalog</a>
+    <a class="btn" href="/item/edit/<%= film.id %>">Edit</a>
+    <form action="/item/hapus/<%= film.id %>" method="POST" onsubmit="return confirm('Yakin ingin menghapus film ini?');">
+      <button type="submit" class="btn btn-danger">Hapus</button>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
